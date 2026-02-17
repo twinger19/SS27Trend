@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
 <title>S/S 27 — Men's Neckwear Trend Directions</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -393,9 +393,173 @@ img { max-width: 100%; display: block; }
   .mood-grid .mg-6 { grid-column: 2 !important; grid-row: 3 !important; }
   .mood-grid .mg-7 { grid-column: 1 / -1 !important; grid-row: 4 !important; max-height: 200px; }
 }
+
+/* ═══ STICKY MOBILE NAV BAR ═══ */
+.mobile-nav-bar {
+  display: none;
+  position: fixed;
+  top: 0; left: 0; width: 100%;
+  z-index: 1000;
+  height: 56px;
+  padding: 0 20px;
+  align-items: center;
+  justify-content: space-between;
+  background: rgba(245,237,227,0.92);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border-bottom: 1px solid rgba(44,36,24,0.06);
+}
+.mobile-nav-bar .nav-title {
+  font-family: var(--serif);
+  font-size: 16px;
+  font-weight: 500;
+  font-style: italic;
+  color: var(--ink);
+}
+@media (max-width: 768px) {
+  .mobile-nav-bar { display: flex; }
+  .page-header { padding-top: 80px; }
+}
+
+/* ═══ MOBILE NAV — Hamburger + Drawer ═══ */
+.mobile-hamburger {
+  display: none;
+  width: 44px;
+  height: 44px;
+  border: none;
+  background: none;
+  cursor: pointer;
+  position: relative;
+  z-index: 1002;
+  padding: 10px;
+  -webkit-tap-highlight-color: transparent;
+}
+.mobile-hamburger span {
+  display: block;
+  width: 22px;
+  height: 2px;
+  background: var(--ink);
+  margin: 5px auto;
+  border-radius: 2px;
+  transition: transform 0.3s ease, opacity 0.3s ease;
+}
+.mobile-hamburger.open span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
+.mobile-hamburger.open span:nth-child(2) { opacity: 0; }
+.mobile-hamburger.open span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
+
+.mobile-drawer-overlay {
+  display: none;
+  position: fixed;
+  inset: 0;
+  background: rgba(44,36,24,0.3);
+  z-index: 999;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+  -webkit-backdrop-filter: blur(4px);
+  backdrop-filter: blur(4px);
+}
+.mobile-drawer-overlay.open { opacity: 1; }
+
+.mobile-drawer {
+  position: fixed;
+  top: 0;
+  right: 0;
+  width: 280px;
+  max-width: 80vw;
+  height: 100%;
+  background: var(--cream-light, #FAF6F0);
+  z-index: 1001;
+  transform: translateX(100%);
+  transition: transform 0.35s cubic-bezier(0.4, 0, 0.2, 1);
+  overflow-y: auto;
+  -webkit-overflow-scrolling: touch;
+  padding: env(safe-area-inset-top, 20px) 28px calc(env(safe-area-inset-bottom, 20px) + 20px) 28px;
+  padding-top: calc(env(safe-area-inset-top, 20px) + 80px);
+  box-shadow: -4px 0 24px rgba(0,0,0,0.08);
+}
+.mobile-drawer.open { transform: translateX(0); }
+
+.mobile-drawer-section {
+  margin-bottom: 24px;
+}
+.mobile-drawer-label {
+  font-family: var(--mono, 'DM Mono', monospace);
+  font-size: 9px;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--ink-faint, #B8AFA4);
+  margin-bottom: 12px;
+  padding-bottom: 8px;
+  border-bottom: 1px solid rgba(44,36,24,0.06);
+}
+.mobile-drawer a {
+  display: block;
+  font-family: var(--sans, 'DM Sans', sans-serif);
+  font-size: 15px;
+  color: var(--ink-light, #5C5042);
+  padding: 12px 0;
+  border-bottom: 1px solid rgba(44,36,24,0.04);
+  -webkit-tap-highlight-color: transparent;
+  transition: color 0.2s;
+}
+.mobile-drawer a:last-child { border-bottom: none; }
+.mobile-drawer a.active {
+  color: var(--ink, #2C2418);
+  font-weight: 600;
+}
+.mobile-drawer a:active { color: var(--ink, #2C2418); }
+
+/* ═══ SAFARI & MOBILE OPTIMIZATIONS ═══ */
+html {
+  -webkit-text-size-adjust: 100%;
+}
+body {
+  padding-top: env(safe-area-inset-top, 0);
+}
+@supports (padding: env(safe-area-inset-bottom)) {
+  .page-footer, footer {
+    padding-bottom: calc(env(safe-area-inset-bottom, 0px) + 48px);
+  }
+}
+
+@media (max-width: 768px) {
+  .mobile-hamburger { display: block; }
+  .mobile-drawer-overlay { display: block; pointer-events: none; }
+  .mobile-drawer-overlay.open { pointer-events: auto; }
+
+  /* Prevent body scroll when drawer is open */
+  body.drawer-open {
+    overflow: hidden;
+    position: fixed;
+    width: 100%;
+  }
+}
+
 </style>
 </head>
 <body>
+
+<div class="mobile-nav-bar">
+  <span class="nav-title">Neckwear</span>
+  <button class="mobile-hamburger" aria-label="Menu"><span></span><span></span><span></span></button>
+</div>
+<div class="mobile-drawer-overlay"></div>
+<div class="mobile-drawer">
+  <div class="mobile-drawer-section">
+    <div class="mobile-drawer-label">On This Page</div>
+    <a href="#">Ornate</a>
+    <a href="#">Prep</a>
+    <a href="#">Modern</a>
+  </div>
+  <div class="mobile-drawer-section">
+    <div class="mobile-drawer-label">All Pages</div>
+    <a href="index.html">Men's Forecast</a>
+    <a href="leather-goods.html">Leather Goods</a>
+    <a href="neckwear.html" class="active">Neckwear</a>
+    <a href="womens.html">Women's Forecast</a>
+  </div>
+</div>
+
 
 <!-- ═══ PAGE HEADER ═══ -->
 <header class="page-header reveal">
@@ -674,6 +838,46 @@ document.addEventListener('DOMContentLoaded', () => {
   }, { threshold: 0.15, rootMargin: '0px 0px -40px 0px' });
   reveals.forEach(el => observer.observe(el));
 });
+
+// ═══ MOBILE NAV ═══
+(function() {
+  const hamburger = document.querySelector('.mobile-hamburger');
+  const drawer = document.querySelector('.mobile-drawer');
+  const overlay = document.querySelector('.mobile-drawer-overlay');
+  if (!hamburger || !drawer || !overlay) return;
+
+  let scrollPos = 0;
+
+  function openDrawer() {
+    scrollPos = window.scrollY;
+    hamburger.classList.add('open');
+    drawer.classList.add('open');
+    overlay.classList.add('open');
+    document.body.classList.add('drawer-open');
+    document.body.style.top = `-${scrollPos}px`;
+  }
+  function closeDrawer() {
+    hamburger.classList.remove('open');
+    drawer.classList.remove('open');
+    overlay.classList.remove('open');
+    document.body.classList.remove('drawer-open');
+    document.body.style.top = '';
+    window.scrollTo(0, scrollPos);
+  }
+
+  hamburger.addEventListener('click', function() {
+    if (drawer.classList.contains('open')) closeDrawer();
+    else openDrawer();
+  });
+  overlay.addEventListener('click', closeDrawer);
+
+  // Close drawer on link click
+  drawer.querySelectorAll('a').forEach(function(a) {
+    a.addEventListener('click', function() {
+      closeDrawer();
+    });
+  });
+})();
 </script>
 </body>
 </html>

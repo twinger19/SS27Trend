@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
 <title>S/S 27 — Women's Accessories Trend Forecast</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -600,6 +600,121 @@ footer {
   .footer-content { flex-direction: column; gap: 20px; text-align: center; }
   .footer-links { flex-wrap: wrap; justify-content: center; }
 }
+
+/* ═══ MOBILE NAV — Hamburger + Drawer ═══ */
+.mobile-hamburger {
+  display: none;
+  width: 44px;
+  height: 44px;
+  border: none;
+  background: none;
+  cursor: pointer;
+  position: relative;
+  z-index: 1002;
+  padding: 10px;
+  -webkit-tap-highlight-color: transparent;
+}
+.mobile-hamburger span {
+  display: block;
+  width: 22px;
+  height: 2px;
+  background: var(--ink);
+  margin: 5px auto;
+  border-radius: 2px;
+  transition: transform 0.3s ease, opacity 0.3s ease;
+}
+.mobile-hamburger.open span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
+.mobile-hamburger.open span:nth-child(2) { opacity: 0; }
+.mobile-hamburger.open span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
+
+.mobile-drawer-overlay {
+  display: none;
+  position: fixed;
+  inset: 0;
+  background: rgba(44,36,24,0.3);
+  z-index: 999;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+  -webkit-backdrop-filter: blur(4px);
+  backdrop-filter: blur(4px);
+}
+.mobile-drawer-overlay.open { opacity: 1; }
+
+.mobile-drawer {
+  position: fixed;
+  top: 0;
+  right: 0;
+  width: 280px;
+  max-width: 80vw;
+  height: 100%;
+  background: var(--cream-light, #FAF6F0);
+  z-index: 1001;
+  transform: translateX(100%);
+  transition: transform 0.35s cubic-bezier(0.4, 0, 0.2, 1);
+  overflow-y: auto;
+  -webkit-overflow-scrolling: touch;
+  padding: env(safe-area-inset-top, 20px) 28px calc(env(safe-area-inset-bottom, 20px) + 20px) 28px;
+  padding-top: calc(env(safe-area-inset-top, 20px) + 80px);
+  box-shadow: -4px 0 24px rgba(0,0,0,0.08);
+}
+.mobile-drawer.open { transform: translateX(0); }
+
+.mobile-drawer-section {
+  margin-bottom: 24px;
+}
+.mobile-drawer-label {
+  font-family: var(--mono, 'DM Mono', monospace);
+  font-size: 9px;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--ink-faint, #B8AFA4);
+  margin-bottom: 12px;
+  padding-bottom: 8px;
+  border-bottom: 1px solid rgba(44,36,24,0.06);
+}
+.mobile-drawer a {
+  display: block;
+  font-family: var(--sans, 'DM Sans', sans-serif);
+  font-size: 15px;
+  color: var(--ink-light, #5C5042);
+  padding: 12px 0;
+  border-bottom: 1px solid rgba(44,36,24,0.04);
+  -webkit-tap-highlight-color: transparent;
+  transition: color 0.2s;
+}
+.mobile-drawer a:last-child { border-bottom: none; }
+.mobile-drawer a.active {
+  color: var(--ink, #2C2418);
+  font-weight: 600;
+}
+.mobile-drawer a:active { color: var(--ink, #2C2418); }
+
+/* ═══ SAFARI & MOBILE OPTIMIZATIONS ═══ */
+html {
+  -webkit-text-size-adjust: 100%;
+}
+body {
+  padding-top: env(safe-area-inset-top, 0);
+}
+@supports (padding: env(safe-area-inset-bottom)) {
+  .page-footer, footer {
+    padding-bottom: calc(env(safe-area-inset-bottom, 0px) + 48px);
+  }
+}
+
+@media (max-width: 768px) {
+  .mobile-hamburger { display: block; }
+  .mobile-drawer-overlay { display: block; pointer-events: none; }
+  .mobile-drawer-overlay.open { pointer-events: auto; }
+
+  /* Prevent body scroll when drawer is open */
+  body.drawer-open {
+    overflow: hidden;
+    position: fixed;
+    width: 100%;
+  }
+}
+
 </style>
 </head>
 <body>
@@ -621,8 +736,29 @@ footer {
     <span style="width:1px;height:16px;background:var(--ink-faint);margin:0 4px;display:inline-block;vertical-align:middle;"></span>
     <a href="index.html">Men's</a>
     <a href="neckwear.html">Neckwear</a>
+    <a href="leather-goods.html">Leather Goods</a>
   </div>
+  <button class="mobile-hamburger" aria-label="Menu"><span></span><span></span><span></span></button>
 </nav>
+<div class="mobile-drawer-overlay"></div>
+<div class="mobile-drawer">
+  <div class="mobile-drawer-section">
+    <div class="mobile-drawer-label">On This Page</div>
+    <a href="#overview">Overview</a>
+    <a href="#narratives">Narratives</a>
+    <a href="#desert">Desert Bazar</a>
+    <a href="#prep">Play It Proper</a>
+    <a href="#products">Key Items</a>
+  </div>
+  <div class="mobile-drawer-section">
+    <div class="mobile-drawer-label">All Pages</div>
+    <a href="index.html">Men's Forecast</a>
+    <a href="leather-goods.html">Leather Goods</a>
+    <a href="neckwear.html">Neckwear</a>
+    <a href="womens.html" class="active">Women's Forecast</a>
+  </div>
+</div>
+
 
 <!-- ═══ HERO ═══ -->
 <section class="hero">
@@ -1191,6 +1327,46 @@ window.addEventListener('scroll', () => {
     img.style.transform = `translateY(${offset}px)`;
   });
 }, { passive: true });
+
+// ═══ MOBILE NAV ═══
+(function() {
+  const hamburger = document.querySelector('.mobile-hamburger');
+  const drawer = document.querySelector('.mobile-drawer');
+  const overlay = document.querySelector('.mobile-drawer-overlay');
+  if (!hamburger || !drawer || !overlay) return;
+
+  let scrollPos = 0;
+
+  function openDrawer() {
+    scrollPos = window.scrollY;
+    hamburger.classList.add('open');
+    drawer.classList.add('open');
+    overlay.classList.add('open');
+    document.body.classList.add('drawer-open');
+    document.body.style.top = `-${scrollPos}px`;
+  }
+  function closeDrawer() {
+    hamburger.classList.remove('open');
+    drawer.classList.remove('open');
+    overlay.classList.remove('open');
+    document.body.classList.remove('drawer-open');
+    document.body.style.top = '';
+    window.scrollTo(0, scrollPos);
+  }
+
+  hamburger.addEventListener('click', function() {
+    if (drawer.classList.contains('open')) closeDrawer();
+    else openDrawer();
+  });
+  overlay.addEventListener('click', closeDrawer);
+
+  // Close drawer on link click
+  drawer.querySelectorAll('a').forEach(function(a) {
+    a.addEventListener('click', function() {
+      closeDrawer();
+    });
+  });
+})();
 </script>
 
 </body>
