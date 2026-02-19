@@ -330,6 +330,7 @@ nav.scrolled { background: rgba(245,237,227,0.95); }
   border-radius: 10px;
   padding: 32px;
   border: 1px solid rgba(44,36,24,0.06);
+  overflow: visible;
 }
 .perf-panel-header {
   display: flex;
@@ -355,8 +356,41 @@ nav.scrolled { background: rgba(245,237,227,0.95); }
   background: white;
   border-radius: 8px;
   padding: 16px 20px;
+  display: flex;
+  gap: 16px;
+  align-items: stretch;
+  overflow: visible;
+  position: relative;
 }
 .perf-item--full { grid-column: 1 / -1; }
+.perf-item-img {
+  flex: 0 0 100px;
+  border-radius: 6px;
+  overflow: hidden;
+  background: var(--cream-dark);
+  align-self: center;
+  position: relative;
+  z-index: 1;
+  cursor: pointer;
+  transition: transform 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94),
+              box-shadow 0.3s ease,
+              z-index 0s;
+}
+.perf-item-img img {
+  width: 100%;
+  height: 100%;
+  min-height: 80px;
+  object-fit: cover;
+  display: block;
+}
+.perf-item-img:hover {
+  transform: scale(2);
+  z-index: 200;
+  box-shadow: 0 12px 40px rgba(44,36,24,0.28), 0 0 0 2px rgba(255,255,255,0.95);
+  border-radius: 8px;
+  overflow: hidden;
+}
+.perf-item-text { flex: 1; min-width: 0; }
 .perf-metric {
   font-family: var(--serif); font-size: 28px; font-weight: 700;
   color: var(--ink); line-height: 1; margin-bottom: 4px;
@@ -493,6 +527,10 @@ nav.scrolled { background: rgba(245,237,227,0.95); }
   .mood-grid .mg-8 { grid-column: 1 / -1 !important; grid-row: 5 !important; max-height: 200px; }
   .perf-grid { grid-template-columns: 1fr; }
   .perf-item--full { grid-column: 1; }
+  .perf-item { gap: 12px; }
+  .perf-item-img { flex: 0 0 72px; }
+  .perf-item-img img { min-height: 64px; }
+  .perf-item-img:hover { transform: none; box-shadow: none; z-index: 1; }
   .wgsn-callout-inner { grid-template-columns: 1fr; padding: 32px 24px; }
   .wgsn-source { writing-mode: horizontal-tb; transform: none; }
   .wgsn-stat-row { gap: 28px; }
@@ -779,33 +817,48 @@ body {
     </div>
     <div class="perf-grid">
       <div class="perf-item">
-        <div class="perf-metric">60%</div>
-        <div class="perf-label">Black dominates dress business</div>
-        <div class="perf-context">4.8% sell-through — the anchor colour for dress leather</div>
+        <div class="perf-item-img"><img src="images/lg-perf-dress-1.jpg" alt="Dress belt — black leather close-up"></div>
+        <div class="perf-item-text">
+          <div class="perf-metric">60%</div>
+          <div class="perf-label">Black dominates dress business</div>
+          <div class="perf-context">4.8% sell-through — the anchor colour for dress leather</div>
+        </div>
       </div>
       <div class="perf-item">
-        <div class="perf-metric">15%</div>
-        <div class="perf-label">Compression &amp; Track Lock closures</div>
-        <div class="perf-context">Both significantly outperform average (5.8% and 5.4% ST vs 4.6% avg)</div>
-        <div class="perf-badge perf-badge--up">Outperforming</div>
+        <div class="perf-item-img"><img src="images/lg-perf-dress-2.jpg" alt="Dress belt — compression closure"></div>
+        <div class="perf-item-text">
+          <div class="perf-metric">15%</div>
+          <div class="perf-label">Compression &amp; Track Lock closures</div>
+          <div class="perf-context">Both significantly outperform average (5.8% and 5.4% ST vs 4.6% avg)</div>
+          <div class="perf-badge perf-badge--up">Outperforming</div>
+        </div>
       </div>
       <div class="perf-item">
-        <div class="perf-metric-sm">35–38mm</div>
-        <div class="perf-label">Key width — significantly outperforming</div>
-        <div class="perf-context">4.9% ST vs 4.6% avg. The modern dress width for high-rise trousers.</div>
-        <div class="perf-badge perf-badge--up">Outperforming</div>
+        <div class="perf-item-img"><img src="images/lg-perf-dress-3.jpg" alt="Dress belt — 35-38mm width on trousers"></div>
+        <div class="perf-item-text">
+          <div class="perf-metric-sm">35–38mm</div>
+          <div class="perf-label">Key width — significantly outperforming</div>
+          <div class="perf-context">4.9% ST vs 4.6% avg. The modern dress width for high-rise trousers.</div>
+          <div class="perf-badge perf-badge--up">Outperforming</div>
+        </div>
       </div>
       <div class="perf-item">
-        <div class="perf-metric-sm">Blackout</div>
-        <div class="perf-label">Buckle finish leading hardware</div>
-        <div class="perf-context">5.4% ST vs 4.6% avg. Nickel (4.3%) and gold tone (3.5%) underperform.</div>
-        <div class="perf-badge perf-badge--up">Outperforming</div>
+        <div class="perf-item-img"><img src="images/lg-perf-dress-4.jpg" alt="Dress belt — blackout buckle finish"></div>
+        <div class="perf-item-text">
+          <div class="perf-metric-sm">Blackout</div>
+          <div class="perf-label">Buckle finish leading hardware</div>
+          <div class="perf-context">5.4% ST vs 4.6% avg. Nickel (4.3%) and gold tone (3.5%) underperform.</div>
+          <div class="perf-badge perf-badge--up">Outperforming</div>
+        </div>
       </div>
       <div class="perf-item perf-item--full">
-        <div class="perf-metric-sm">Reversible</div>
-        <div class="perf-label">Reversible styles outperform in dress</div>
-        <div class="perf-context">4.7% ST vs 4.6% avg — slight edge. Dual-colour (black/brown) remains a core value proposition for the dress customer.</div>
-        <div class="perf-badge perf-badge--up">Outperforming</div>
+        <div class="perf-item-img"><img src="images/lg-perf-dress-5.jpg" alt="Dress belt — reversible black/cognac"></div>
+        <div class="perf-item-text">
+          <div class="perf-metric-sm">Reversible</div>
+          <div class="perf-label">Reversible styles outperform in dress</div>
+          <div class="perf-context">4.7% ST vs 4.6% avg — slight edge. Dual-colour (black/brown) remains a core value proposition for the dress customer.</div>
+          <div class="perf-badge perf-badge--up">Outperforming</div>
+        </div>
       </div>
     </div>
   </div>
@@ -920,33 +973,48 @@ body {
     </div>
     <div class="perf-grid">
       <div class="perf-item">
-        <div class="perf-metric">87%</div>
-        <div class="perf-label">Manmade &amp; fabric constructions</div>
-        <div class="perf-context">Manmade: 4.2% ST vs 3.8% avg. Fabric: 4.1% ST vs 3.8% avg. Both outperform.</div>
-        <div class="perf-badge perf-badge--up">Outperforming</div>
+        <div class="perf-item-img"><img src="images/lg-perf-casual-1.jpg" alt="Refined casual — fabric belt construction"></div>
+        <div class="perf-item-text">
+          <div class="perf-metric">87%</div>
+          <div class="perf-label">Manmade &amp; fabric constructions</div>
+          <div class="perf-context">Manmade: 4.2% ST vs 3.8% avg. Fabric: 4.1% ST vs 3.8% avg. Both outperform.</div>
+          <div class="perf-badge perf-badge--up">Outperforming</div>
+        </div>
       </div>
       <div class="perf-item">
-        <div class="perf-metric">51%</div>
-        <div class="perf-label">Black — still #1 in dress casual</div>
-        <div class="perf-context">Black leads unit sales. Tan underperforms at 2.5% ST — opportunity to push warm neutrals instead.</div>
+        <div class="perf-item-img"><img src="images/lg-perf-casual-2.jpg" alt="Refined casual — black belt on chinos"></div>
+        <div class="perf-item-text">
+          <div class="perf-metric">51%</div>
+          <div class="perf-label">Black — still #1 in dress casual</div>
+          <div class="perf-context">Black leads unit sales. Tan underperforms at 2.5% ST — opportunity to push warm neutrals instead.</div>
+        </div>
       </div>
       <div class="perf-item">
-        <div class="perf-metric-sm">5.5% ST</div>
-        <div class="perf-label">Track Lock closure — top performer</div>
-        <div class="perf-context">Significantly outperforms 3.8% avg. Compression also strong at 5.2% ST.</div>
-        <div class="perf-badge perf-badge--up">Outperforming</div>
+        <div class="perf-item-img"><img src="images/lg-perf-casual-3.jpg" alt="Refined casual — track lock belt"></div>
+        <div class="perf-item-text">
+          <div class="perf-metric-sm">5.5% ST</div>
+          <div class="perf-label">Track Lock closure — top performer</div>
+          <div class="perf-context">Significantly outperforms 3.8% avg. Compression also strong at 5.2% ST.</div>
+          <div class="perf-badge perf-badge--up">Outperforming</div>
+        </div>
       </div>
       <div class="perf-item">
-        <div class="perf-metric-sm">&le;32mm</div>
-        <div class="perf-label">Narrow widths outperforming</div>
-        <div class="perf-context">4.2% ST vs 3.8% avg. Narrower widths align with the relaxed, modern silhouette.</div>
-        <div class="perf-badge perf-badge--up">Outperforming</div>
+        <div class="perf-item-img"><img src="images/lg-perf-casual-4.jpg" alt="Refined casual — narrow width on chinos"></div>
+        <div class="perf-item-text">
+          <div class="perf-metric-sm">&le;32mm</div>
+          <div class="perf-label">Narrow widths outperforming</div>
+          <div class="perf-context">4.2% ST vs 3.8% avg. Narrower widths align with the relaxed, modern silhouette.</div>
+          <div class="perf-badge perf-badge--up">Outperforming</div>
+        </div>
       </div>
       <div class="perf-item perf-item--full">
-        <div class="perf-metric-sm">Reversible</div>
-        <div class="perf-label">Reversible outperforms in dress casual</div>
-        <div class="perf-context">4.2% ST vs 3.8% avg — versatile dual-colour styles resonate with the bridge customer between office and weekend.</div>
-        <div class="perf-badge perf-badge--up">Outperforming</div>
+        <div class="perf-item-img"><img src="images/lg-perf-casual-5.jpg" alt="Refined casual — reversible dual-colour"></div>
+        <div class="perf-item-text">
+          <div class="perf-metric-sm">Reversible</div>
+          <div class="perf-label">Reversible outperforms in dress casual</div>
+          <div class="perf-context">4.2% ST vs 3.8% avg — versatile dual-colour styles resonate with the bridge customer between office and weekend.</div>
+          <div class="perf-badge perf-badge--up">Outperforming</div>
+        </div>
       </div>
     </div>
   </div>
@@ -1062,33 +1130,48 @@ body {
     </div>
     <div class="perf-grid">
       <div class="perf-item">
-        <div class="perf-metric">Brown/Tan</div>
-        <div class="perf-label">Brown &amp; tan drive the casual business</div>
-        <div class="perf-context">4.7% ST vs 4.3% avg — leather in warm earth tones is the clear winner here.</div>
-        <div class="perf-badge perf-badge--up">Outperforming</div>
+        <div class="perf-item-img"><img src="images/lg-perf-work-1.jpg" alt="Casual belt — brown leather on denim"></div>
+        <div class="perf-item-text">
+          <div class="perf-metric">Brown/Tan</div>
+          <div class="perf-label">Brown &amp; tan drive the casual business</div>
+          <div class="perf-context">4.7% ST vs 4.3% avg — leather in warm earth tones is the clear winner here.</div>
+          <div class="perf-badge perf-badge--up">Outperforming</div>
+        </div>
       </div>
       <div class="perf-item">
-        <div class="perf-metric-sm">5.0% ST</div>
-        <div class="perf-label">Fully adjustable — top closure type</div>
-        <div class="perf-context">Significantly outperforms 4.3% avg. Versatile fit for casual and workwear pants.</div>
-        <div class="perf-badge perf-badge--up">Outperforming</div>
+        <div class="perf-item-img"><img src="images/lg-perf-work-2.jpg" alt="Casual belt — fully adjustable closure"></div>
+        <div class="perf-item-text">
+          <div class="perf-metric-sm">5.0% ST</div>
+          <div class="perf-label">Fully adjustable — top closure type</div>
+          <div class="perf-context">Significantly outperforms 4.3% avg. Versatile fit for casual and workwear pants.</div>
+          <div class="perf-badge perf-badge--up">Outperforming</div>
+        </div>
       </div>
       <div class="perf-item">
-        <div class="perf-metric">86%</div>
-        <div class="perf-label">Standard 35–38mm width</div>
-        <div class="perf-context">Dominates casual. Wider belts (&gt;38mm) also outperform at 4.6% ST vs 4.3% avg.</div>
+        <div class="perf-item-img"><img src="images/lg-perf-work-3.jpg" alt="Casual belt — 35-38mm standard width"></div>
+        <div class="perf-item-text">
+          <div class="perf-metric">86%</div>
+          <div class="perf-label">Standard 35–38mm width</div>
+          <div class="perf-context">Dominates casual. Wider belts (&gt;38mm) also outperform at 4.6% ST vs 4.3% avg.</div>
+        </div>
       </div>
       <div class="perf-item">
-        <div class="perf-metric-sm">Black HW</div>
-        <div class="perf-label">Black hardware leads casual</div>
-        <div class="perf-context">4.8% ST vs 4.3% avg. Nickel-tone also solid at 4.5% ST. Both outperform.</div>
-        <div class="perf-badge perf-badge--up">Outperforming</div>
+        <div class="perf-item-img"><img src="images/lg-perf-work-4.jpg" alt="Casual belt — black hardware finish"></div>
+        <div class="perf-item-text">
+          <div class="perf-metric-sm">Black HW</div>
+          <div class="perf-label">Black hardware leads casual</div>
+          <div class="perf-context">4.8% ST vs 4.3% avg. Nickel-tone also solid at 4.5% ST. Both outperform.</div>
+          <div class="perf-badge perf-badge--up">Outperforming</div>
+        </div>
       </div>
       <div class="perf-item perf-item--full">
-        <div class="perf-metric-sm">Non-Reversible</div>
-        <div class="perf-label">Non-reversible outperforms in casual</div>
-        <div class="perf-context">4.5% ST vs 4.3% avg. The casual customer values a dedicated colour over versatility — commit to brown/tan.</div>
-        <div class="perf-badge perf-badge--up">Outperforming</div>
+        <div class="perf-item-img"><img src="images/lg-perf-work-5.jpg" alt="Casual belt — non-reversible brown"></div>
+        <div class="perf-item-text">
+          <div class="perf-metric-sm">Non-Reversible</div>
+          <div class="perf-label">Non-reversible outperforms in casual</div>
+          <div class="perf-context">4.5% ST vs 4.3% avg. The casual customer values a dedicated colour over versatility — commit to brown/tan.</div>
+          <div class="perf-badge perf-badge--up">Outperforming</div>
+        </div>
       </div>
     </div>
   </div>
@@ -1101,20 +1184,29 @@ body {
     </div>
     <div class="perf-grid">
       <div class="perf-item">
-        <div class="perf-metric-sm">78%</div>
-        <div class="perf-label">Wider belts (38mm+) dominate units</div>
-        <div class="perf-context">The Columbia customer skews toward substantial widths for outdoor and workwear use.</div>
+        <div class="perf-item-img"><img src="images/lg-perf-columbia-1.jpg" alt="Columbia — wide casual belt"></div>
+        <div class="perf-item-text">
+          <div class="perf-metric-sm">78%</div>
+          <div class="perf-label">Wider belts (38mm+) dominate units</div>
+          <div class="perf-context">The Columbia customer skews toward substantial widths for outdoor and workwear use.</div>
+        </div>
       </div>
       <div class="perf-item">
-        <div class="perf-metric-sm">Non-Rev</div>
-        <div class="perf-label">Non-reversible outperforms</div>
-        <div class="perf-context">4.4% ST vs 4.2% avg. Dedicated colour commitment over flip versatility.</div>
-        <div class="perf-badge perf-badge--up">Outperforming</div>
+        <div class="perf-item-img"><img src="images/lg-perf-columbia-2.jpg" alt="Columbia — non-reversible belt"></div>
+        <div class="perf-item-text">
+          <div class="perf-metric-sm">Non-Rev</div>
+          <div class="perf-label">Non-reversible outperforms</div>
+          <div class="perf-context">4.4% ST vs 4.2% avg. Dedicated colour commitment over flip versatility.</div>
+          <div class="perf-badge perf-badge--up">Outperforming</div>
+        </div>
       </div>
       <div class="perf-item perf-item--full">
-        <div class="perf-label">Top sellers: black casual non-stretch leather, stretch &amp; lace braid styles</div>
-        <div class="perf-context">These constructions are significantly outperforming within the Columbia casual assortment.</div>
-        <div class="perf-badge perf-badge--up">Outperforming</div>
+        <div class="perf-item-img"><img src="images/lg-perf-columbia-3.jpg" alt="Columbia — lace braid and stretch belts"></div>
+        <div class="perf-item-text">
+          <div class="perf-label">Top sellers: black casual non-stretch leather, stretch &amp; lace braid styles</div>
+          <div class="perf-context">These constructions are significantly outperforming within the Columbia casual assortment.</div>
+          <div class="perf-badge perf-badge--up">Outperforming</div>
+        </div>
       </div>
     </div>
   </div>
